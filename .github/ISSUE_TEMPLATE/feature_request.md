@@ -2,7 +2,7 @@
 name: Feature request
 about: 기능 구현과 관련된 이슈 템플릿
 title: 'feature: 로그인 기능 구현'
-labels: feature
+labels: ''
 assignees: ''
 
 ---
