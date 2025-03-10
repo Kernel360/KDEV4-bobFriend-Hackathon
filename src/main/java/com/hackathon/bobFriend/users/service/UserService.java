@@ -1,5 +1,6 @@
 package com.hackathon.bobFriend.users.service;
 
+import com.hackathon.bobFriend.common.JwtProvider;
 import com.hackathon.bobFriend.users.dto.UserRequest;
 import com.hackathon.bobFriend.users.dto.UserResponse;
 import com.hackathon.bobFriend.users.repository.UserRepository;
@@ -17,6 +18,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
 
     // 회원 가입
     public UserResponse createUser(UserRequest userRequest) {
@@ -28,7 +30,7 @@ public class UserService {
     }
 
     // 로그인
-    public UserResponse login(UserRequest userRequest) {
+    public String login(UserRequest userRequest) {
 
         var entity = userRepository.findByEmail(userRequest.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("User with email : [%s] not found", userRequest.getEmail())));
@@ -37,7 +39,7 @@ public class UserService {
             throw new BadCredentialsException("invalid password");
         }
 
-        return UserResponse.toDto(entity);
+        return jwtProvider.createToken(userRequest.getEmail());
     }
 
     // 마이페이지
