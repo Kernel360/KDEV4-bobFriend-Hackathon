@@ -62,29 +62,23 @@ public class UserService {
     // 마이페이지 - 회원 정보 수정
     public UserResponse updateUser(UserRequest userRequest) {
 
-        var entity = userRepository.findByEmail(userRequest.getEmail());
+        var entity = userRepository.findByEmail(userRequest.getEmail())
+                .orElseThrow(() -> new EntityNotFoundException(String.format("User with email : [%s] not found", userRequest.getEmail())));
 
-        if(entity.isPresent()) {
-            var updated = userRepository.save(UserRequest.toEntity(userRequest));
-            return UserResponse.toDto(updated);
+            entity.setName(userRequest.getName());
+            entity.setEmail(userRequest.getEmail());
+            entity.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 
-        } else {
-            throw new EntityNotFoundException(userRequest.getEmail());
-        }
+            return UserResponse.toDto(userRepository.save(entity));
     }
 
     // 마이페이지 - 회원 탈퇴
     public UserResponse deleteUser(Long id) {
 
-        var entity = userRepository.findById(id);
+        var entity = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("User with id : [%s] not found", id)));
 
-        if(entity.isPresent()) {
-            var found = entity.get();
-            found.setIsActive(false);
-            return UserResponse.toDto(userRepository.save(found));
-
-        } else {
-            throw new EntityNotFoundException(String.format("User with id : [%s] not found", id));
-        }
+        entity.setIsActive(false);
+        return UserResponse.toDto(userRepository.save(entity));
     }
 }
