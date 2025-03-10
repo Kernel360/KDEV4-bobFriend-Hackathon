@@ -5,6 +5,8 @@ import com.hackathon.bobFriend.users.dto.UserResponse;
 import com.hackathon.bobFriend.users.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +16,26 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // 회원 가입
     public UserResponse createUser(UserRequest userRequest) {
 
-        var entity = userRepository.save(UserRequest.toEntity(userRequest));
+        var entity = UserRequest.toEntity(userRequest);
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+
+        return UserResponse.toDto(userRepository.save(entity));
+    }
+
+    // 로그인
+    public UserResponse login(UserRequest userRequest) {
+
+        var entity = userRepository.findByEmail(userRequest.getEmail())
+                .orElseThrow(() -> new EntityNotFoundException(String.format("User with email : [%s] not found", userRequest.getEmail())));
+
+        if(!passwordEncoder.matches(userRequest.getPassword(), entity.getPassword())) {
+            throw new BadCredentialsException("invalid password");
+        }
 
         return UserResponse.toDto(entity);
     }
@@ -50,6 +67,7 @@ public class UserService {
         if(entity.isPresent()) {
             var updated = userRepository.save(UserRequest.toEntity(userRequest));
             return UserResponse.toDto(updated);
+
         } else {
             throw new EntityNotFoundException(userRequest.getEmail());
         }
@@ -64,6 +82,7 @@ public class UserService {
             var found = entity.get();
             found.setIsActive(false);
             return UserResponse.toDto(userRepository.save(found));
+
         } else {
             throw new EntityNotFoundException(String.format("User with id : [%s] not found", id));
         }
