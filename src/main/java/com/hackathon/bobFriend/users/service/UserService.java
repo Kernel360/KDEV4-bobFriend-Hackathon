@@ -1,6 +1,6 @@
 package com.hackathon.bobFriend.users.service;
 
-import com.hackathon.bobFriend.common.JwtProvider;
+import com.hackathon.bobFriend.common.security.JwtProvider;
 import com.hackathon.bobFriend.users.dto.LoginRequest;
 import com.hackathon.bobFriend.users.dto.UserRequest;
 import com.hackathon.bobFriend.users.dto.UserResponse;

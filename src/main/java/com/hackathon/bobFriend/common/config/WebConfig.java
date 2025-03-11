@@ -1,4 +1,4 @@
-package com.hackathon.bobFriend.common;
+package com.hackathon.bobFriend.common.config;
 
 
 import org.springframework.context.annotation.Bean;
