@@ -1,5 +1,6 @@
 package com.hackathon.bobFriend.places.dto;
 
+import com.hackathon.bobFriend.places.entity.PlaceCategory;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +11,7 @@ public class PlaceDto {
         public String name;
         public String content;
         public String address;
-        public String category;
-        // enum category
+        public PlaceCategory category;
     }
 
     @Getter
@@ -31,7 +31,8 @@ public class PlaceDto {
         public String name;
         public String content;
         public String address;
-        public String category;
+        public PlaceCategory category;
+        public String user_name;
 //        public int likeCount;
     }
 }

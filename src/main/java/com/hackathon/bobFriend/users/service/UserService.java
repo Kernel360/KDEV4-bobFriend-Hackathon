@@ -6,6 +6,7 @@ import com.hackathon.bobFriend.users.dto.UserRequest;
 import com.hackathon.bobFriend.users.dto.UserResponse;
 import com.hackathon.bobFriend.users.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,10 +42,22 @@ public class UserService {
     }
 
     // 마이페이지
-    public UserResponse getUserById(Long id) {
+    public UserResponse validateUser(String token) {
 
-        var entity = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("User with id : [%s] not found", id)));
+        JwtProvider jwtProvider = new JwtProvider();
+
+        if(jwtProvider.validateToken(token)) {
+            var entity = userRepository.findByEmail(jwtProvider.getEmail(token))
+                    .orElseThrow(() -> new EntityNotFoundException(String.format("User with email : [%s] not found", jwtProvider.getEmail(token))));
+
+            return UserResponse.toDto(entity);
+        } else {
+            throw new ValidationException("invalid token");
+        }
+    }
+
+    public UserResponse getUserById(Long id) {
+        var entity = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("User with id : [%s] not found", id)));
 
         return UserResponse.toDto(entity);
     }

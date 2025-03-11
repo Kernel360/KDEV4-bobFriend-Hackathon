@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Key;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Date;
 @Component
 public class JwtProvider {
     private static final String secretKey = "my-secret-key-my-secret-key-my-secret-key";
-    private static final long validityInMilliseconds = 3600000;
+    private static final long validityInMilliseconds = 100000000;
 
     private final Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
 

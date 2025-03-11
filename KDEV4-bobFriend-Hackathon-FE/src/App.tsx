@@ -1,19 +1,29 @@
-import PostList from './components/PostList'
+import PlaceList from './components/PlaceList'
 import SignUp from './components/SignUp'
 import Login from './components/Login'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import UserInfo from './components/UserInfo'
+import GatheringList from './components/GatheringList'
 
 export default function App() {
   return (
     <Router>
       <Routes>
         <Route
-          path="/places"
+          path="/bobfriend/gatherings"
           element={
             <>
               <UserInfo />
-              <PostList />
+              <GatheringList />
+            </>
+          }
+        />
+        <Route
+          path="/bobfriend/places"
+          element={
+            <>
+              <UserInfo />
+              <PlaceList />
             </>
           }
         />

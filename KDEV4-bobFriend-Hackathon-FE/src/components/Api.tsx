@@ -7,11 +7,10 @@ const Api = axios.create({
 // 요청 인터셉터: 요청 보낼 때 JWT 자동 추가
 Api.interceptors.request.use(
   config => {
-    console.log('토큰 생성중...')
     const token = localStorage.getItem('token')?.replace('Bearer ', '').trim() // 'Bearer ' 제거하고 JWT만 사용
     if (token) {
       // secured 쿠키
-      console.log(token)
+      console.log('토큰 생성됨')
       config.headers.Authorization = `Bearer ${token}` // 인증 헤더 추가
     }
     return config

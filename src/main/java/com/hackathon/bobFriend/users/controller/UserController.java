@@ -3,6 +3,7 @@ package com.hackathon.bobFriend.users.controller;
 import com.hackathon.bobFriend.users.dto.LoginRequest;
 import com.hackathon.bobFriend.users.dto.UserRequest;
 import com.hackathon.bobFriend.users.dto.UserResponse;
+import com.hackathon.bobFriend.users.repository.UserRepository;
 import com.hackathon.bobFriend.users.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,11 @@ public class UserController {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
         return ResponseEntity.ok().body(map);
+    }
+
+    @GetMapping("/users/validate")
+    public ResponseEntity<UserResponse> validateUser(@RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(userService.validateUser(token));
     }
 
     @GetMapping("/users/{id}")

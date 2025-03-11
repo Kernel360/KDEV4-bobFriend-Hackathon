@@ -26,7 +26,8 @@ public class Place {
     @NotNull
     private String address;
 
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private PlaceCategory category;
 
 //    private int likeCount = 0;
 
@@ -44,16 +45,5 @@ public class Place {
 //        this.isDeleted = true;
 //    }
 
-    public enum Category {
-        KOR("한식"),
-        JPN("일식"),
-        CHN("중식"),
-        WES("양식");
 
-        private String category;
-
-        Category(String category) {
-            this.category = category;
-        }
-    }
 }
