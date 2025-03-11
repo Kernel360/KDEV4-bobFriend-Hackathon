@@ -55,7 +55,7 @@ public class GatheringEntity {
   @Enumerated(value = EnumType.STRING)
   private GatheringState state;
 
-  private String talk_thema;
+  private String talk_thema; /*conversation subject*/
 
   @Column(nullable = false)
   @Enumerated(value = EnumType.STRING)
