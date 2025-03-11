@@ -27,7 +27,8 @@ public class UserController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<Map<String,Object>> login(@RequestParam String email, @RequestParam String password) {
+    public ResponseEntity<Map<String,String>> login(@RequestParam String email, @RequestParam String password) {
+  
         LoginRequest loginRequest = new LoginRequest(email, password);
         String token = "";
         Map<String, Object> map = new HashMap<>();

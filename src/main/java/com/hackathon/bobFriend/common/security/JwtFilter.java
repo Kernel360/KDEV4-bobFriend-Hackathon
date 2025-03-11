@@ -1,4 +1,4 @@
-package com.hackathon.bobFriend.common;
+package com.hackathon.bobFriend.common.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
