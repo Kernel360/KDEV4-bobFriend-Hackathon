@@ -25,7 +25,7 @@ public class UserController {
         return ResponseEntity.ok(userService.createUser(userRequest));
     }
 
-    @PostMapping("/auth")
+    @PostMapping("/login")
     public ResponseEntity<Map<String,String>> login(@RequestParam String email, @RequestParam String password) {
         LoginRequest loginRequest = new LoginRequest(email, password);
         String token = "";
