@@ -9,7 +9,6 @@ Api.interceptors.request.use(
   config => {
     console.log('토큰 생성중...')
     const token = localStorage.getItem('token')?.replace('Bearer ', '').trim() // 'Bearer ' 제거하고 JWT만 사용
-    console.log(token)
     if (token) {
       // secured 쿠키
       console.log(token)
