@@ -44,11 +44,9 @@ export default function Login() {
 
       if (response.ok) {
         const data = await response.json()
-        console.log('로그인 성공')
-        console.log(data)
         localStorage.setItem('token', data.token)
         localStorage.setItem('username', data.user.name)
-        navigate('/places')
+        navigate('/bobfriend/places')
       } else {
         throw new Error('로그인 실패! 다시 시도해 주세요.')
       }

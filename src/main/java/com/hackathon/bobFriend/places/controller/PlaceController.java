@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/places")
+@RequestMapping("bobfriend")
 @RequiredArgsConstructor
 public class PlaceController {
 
     private final PlaceService placeService;
 
-    @PostMapping // 장소 등록
+    @PostMapping("/places") // 장소 등록
     public ResponseEntity createPlace(@RequestBody PlaceDto.Post placePostDto) {
         PlaceDto.Response response = placeService.create(placePostDto);
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
 
-    @PatchMapping // 장소 수정
+    @PatchMapping("/places") // 장소 수정
     public ResponseEntity updatePlace(@RequestBody PlaceDto.Patch placePatchDto) {
         PlaceDto.Response response = placeService.update(placePatchDto);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
-    @GetMapping // 장소 전체 보기
+    @GetMapping("/places") // 장소 전체 보기
     // createdAt 순으로 정렬? 좋아요 순으로 정렬?
 //    public ResponseEntity getAllPlace(@RequestParam(value = "sort", defaultValue = "") String ss) {
     public ResponseEntity getAllPlace() {
@@ -36,13 +36,13 @@ public class PlaceController {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
-    @GetMapping("/{placeId}") // 장소 하나 보기
+    @GetMapping("/places/{placeId}") // 장소 하나 보기
     public ResponseEntity getPlace(@PathVariable("placeId") long id) {
         PlaceDto.Response response = placeService.get(id);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{placeId}") // 장소 삭제
+    @DeleteMapping("/places/{placeId}") // 장소 삭제
     public ResponseEntity deletePlace(@PathVariable("placeId") long id) {
         placeService.delete(id);
         return new ResponseEntity(HttpStatus.OK);

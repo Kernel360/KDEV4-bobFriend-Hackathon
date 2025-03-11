@@ -17,17 +17,19 @@ export default function UserInfo() {
 
   useEffect(() => {
     fetchUser()
-  })
+  }, [user])
 
   const fetchUser = async () => {
     try {
-      const response = await Api.get('http://localhost:8080/bobfriend/users', {
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await Api.get(
+        'http://localhost:8080/bobfriend/users/validate',
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      })
+      )
       setUser(response.data.name)
-      console.log('token : ' + localStorage.getItem('token'))
       if (localStorage.getItem('token') !== null) {
         setIsLoggedIn(true)
         setUser(localStorage.getItem('username') + '')

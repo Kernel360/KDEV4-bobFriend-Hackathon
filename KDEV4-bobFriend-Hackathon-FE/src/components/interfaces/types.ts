@@ -13,6 +13,7 @@ export interface Place {
   name: string
   content: string
   address: string
+  category: string
 }
 
 export interface User {

@@ -3,7 +3,7 @@ import { ApiResponse, Place, UserResponse } from './interfaces/types'
 import Api from './Api'
 import Pagination from './Pagination'
 
-const PostList: React.FC = () => {
+const PlaceList: React.FC = () => {
   const [places, setPlaces] = useState<Place[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [currentPage, setCurrentPage] = useState<number>(1)
@@ -11,7 +11,7 @@ const PostList: React.FC = () => {
 
   const fetchPost = async () => {
     const response = await Api.get(
-      'http://localhost:8080/places', // ?page=' + (currentPage - 1)
+      'http://localhost:8080/bobfriend/places', // ?page=' + (currentPage - 1)
       {
         headers: {
           'Content-Type': 'application/json'
@@ -39,6 +39,7 @@ const PostList: React.FC = () => {
             key={place.id}
             className="rounded-lg bg-gray-50 p-4 shadow-md transition-all hover:shadow-xl">
             <div className="mb-2 flex items-center justify-between">
+              <button>{place.category}</button>
               <strong className="text-xl font-semibold text-gray-900">
                 {place.name}
               </strong>
@@ -57,13 +58,13 @@ const PostList: React.FC = () => {
           </li>
         ))}
       </ul>
-      <Pagination
+      {/* <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={setCurrentPage}
-      />
+      /> */}
     </div>
   )
 }
 
-export default PostList
+export default PlaceList
