@@ -33,8 +33,8 @@ create table gatherings (
     state enum('ING', 'END') not null,
     talk_thema varchar(100),
     talk_flag enum('I', 'E', 'N') not null,
-	is_deleted boolean default false,
-    user_id bigint not null, /*fk from users table*/
+	  is_deleted boolean default false,
+    user_id bigint, /*fk from users table*/
     place_id bigint, /*fk from places table*/
     foreign key (user_id) references users (id),
     foreign key (place_id) references places (id)
