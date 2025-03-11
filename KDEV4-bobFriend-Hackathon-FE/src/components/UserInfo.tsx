@@ -12,25 +12,28 @@ export default function UserInfo() {
   }
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.location.href = '/jeedn/login'
+    window.location.href = '/bobfriend/auth'
   }
 
   useEffect(() => {
     fetchUser()
   })
+
   const fetchUser = async () => {
     try {
-      const response = await Api.get(
-        'http://localhost:8080/bobfriend/users/1',
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
+      const response = await Api.get('http://localhost:8080/bobfriend/users', {
+        headers: {
+          'Content-Type': 'application/json'
         }
-      )
-      console.log(response.data.body)
-      setUser(response.data.body)
-      setIsLoggedIn(true)
+      })
+      setUser(response.data.name)
+      console.log('token : ' + localStorage.getItem('token'))
+      if (localStorage.getItem('token') !== null) {
+        setIsLoggedIn(true)
+        setUser(localStorage.getItem('username') + '')
+      } else {
+        setIsLoggedIn(false)
+      }
     } catch (error) {
       setIsLoggedIn(false)
     }
