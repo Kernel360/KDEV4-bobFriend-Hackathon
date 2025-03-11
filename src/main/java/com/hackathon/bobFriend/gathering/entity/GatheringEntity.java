@@ -53,6 +53,9 @@ public class GatheringEntity {
     private GatheringState state;
 
     private String talkThema;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private GatherTalkFlag talkFlag;
 
     private boolean isDeleted;
