@@ -2,6 +2,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import Api from './Api'
+import { User } from './interfaces/types'
 
 interface LoginFormData {
   email: string
@@ -9,6 +10,7 @@ interface LoginFormData {
 }
 
 export default function Login() {
+  const [user, setUser] = useState<User>()
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: ''
@@ -43,9 +45,10 @@ export default function Login() {
       if (response.ok) {
         const data = await response.json()
         console.log('로그인 성공')
-        console.log(data.token)
+        console.log(data)
         localStorage.setItem('token', data.token)
-        navigate('/bobfriend')
+        localStorage.setItem('username', data.user.name)
+        navigate('/places')
       } else {
         throw new Error('로그인 실패! 다시 시도해 주세요.')
       }

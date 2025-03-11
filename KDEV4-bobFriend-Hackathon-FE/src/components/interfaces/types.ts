@@ -8,18 +8,16 @@ export interface ApiResponse {
   error?: ErrorResponse | null
 }
 
-export interface Post {
+export interface Place {
   id: number
-  board_id: number
-  user_id: number
-  user_name: string
-  title: string
-  artist: string
+  name: string
   content: string
-  link: string
-  status: string
-  created_at: number[] // [년, 월, 일, 시, 분, 초] 형태의 배열
-  reply_list: Reply[] | null
+  address: string
+}
+
+export interface User {
+  name: string
+  email: string
 }
 
 export interface Pagination {

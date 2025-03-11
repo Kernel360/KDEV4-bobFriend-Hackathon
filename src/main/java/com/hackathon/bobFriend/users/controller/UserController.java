@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,16 +27,22 @@ public class UserController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<Map<String,String>> login(@RequestParam String email, @RequestParam String password) {
+    public ResponseEntity<Map<String,Object>> login(@RequestParam String email, @RequestParam String password) {
         LoginRequest loginRequest = new LoginRequest(email, password);
         String token = "";
+        Map<String, Object> map = new HashMap<>();
         try {
             token = userService.login(loginRequest);
+            System.out.println("token generated : " + token);
+
+            map.put("token", token);
+            map.put("user", userService.getUserByEmail(email));
         }
         catch(Exception e){
             System.out.println("Login failed");
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
-        return ResponseEntity.ok().body(Map.of("token", token));
+        return ResponseEntity.ok().body(map);
     }
 
     @GetMapping("/users/{id}")

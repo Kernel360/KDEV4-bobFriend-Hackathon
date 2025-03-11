@@ -35,7 +35,7 @@ public class UserService {
         var entity = userRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("User with email : [%s] not found", loginRequest.getEmail())));
         if(!passwordEncoder.matches(loginRequest.getPassword(), entity.getPassword())) {
-            throw new BadCredentialsException("invalid password");
+            throw new EntityNotFoundException("invalid password");
         }
         return jwtProvider.createToken(loginRequest.getEmail());
     }
@@ -45,6 +45,12 @@ public class UserService {
 
         var entity = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("User with id : [%s] not found", id)));
+
+        return UserResponse.toDto(entity);
+    }
+
+    public UserResponse getUserByEmail(String email) {
+        var entity = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException(String.format("User with email : [%s] not found", email)));
 
         return UserResponse.toDto(entity);
     }
