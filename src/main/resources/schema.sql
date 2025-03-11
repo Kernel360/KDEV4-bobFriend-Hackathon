@@ -9,7 +9,7 @@ create table users (
 	id bigint auto_increment primary key,
     name varchar(30) not null, /*realname*/
     email varchar(50) not null unique,
-	password varchar(50) not null,
+	password varchar(300) not null,
     is_active boolean default true,
     created_at timestamp default current_timestamp
 );

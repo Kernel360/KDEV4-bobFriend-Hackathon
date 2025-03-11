@@ -3,7 +3,7 @@ insert into users (name, email, password)
 insert into users (name, email, password) 
 	values ('송어진', 'eojin222@naver.com', 'eojin222!');
 insert into users (name, email, password) 
-	values ('오승택', 'taek333@naver.com', 'tack333!');
+	values ('오승택', 'taek333@naver.com', '$2a$10$dvugJh/WePMbAYPs3rbXaOUGNT0i7Xu71Ais12QOu9lV4TWwiZ51i');
 insert into users (name, email, password) 
 	values ('허성은', 'sung555@naver.com', 'sung555!');
 
