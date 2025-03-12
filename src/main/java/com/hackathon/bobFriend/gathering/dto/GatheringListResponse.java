@@ -20,13 +20,10 @@ public class GatheringListResponse {
 
     private List<GatheringResponse> responses;
 
-    public static GatheringListResponse of(List<GatheringEntity> entities) {
-        List<GatheringResponse> responses = entities.stream()
+    public static List<GatheringResponse> of(List<GatheringEntity> entities) {
+         return entities.stream()
             .map(GatheringResponse::of)
             .toList();
 
-        return GatheringListResponse.builder()
-            .responses(responses)
-            .build();
     }
 }

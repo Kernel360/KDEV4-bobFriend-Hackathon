@@ -59,4 +59,10 @@ public class GatheringEntity {
     private GatherTalkFlag talkFlag;
 
     private boolean isDeleted;
+
+    private Long userId;
+
+    private Long placeId;
+
+    private String userName;
 }

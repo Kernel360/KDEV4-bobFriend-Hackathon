@@ -19,6 +19,7 @@ public class PlaceService {
                 .name(post.getName())
                 .content(post.getContent())
                 .address(post.getAddress())
+                .category(post.getCategory())
                 .build();
         Place savedPlace = placeRepository.save(place);
         PlaceDto.Response response = PlaceDto.Response.builder()
@@ -26,6 +27,7 @@ public class PlaceService {
                 .name(savedPlace.getName())
                 .content(savedPlace.getContent())
                 .address(savedPlace.getAddress())
+                .category(savedPlace.getCategory())
                 // like count, category
                 .build();
         return response;

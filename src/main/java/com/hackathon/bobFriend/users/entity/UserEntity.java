@@ -1,16 +1,16 @@
 package com.hackathon.bobFriend.users.entity;
 
-import jakarta.persistence.Entity;
+import com.hackathon.bobFriend.gathering.entity.GatheringEntity;
+import jakarta.persistence.*;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -32,4 +32,5 @@ public class UserEntity {
     private Boolean isActive;
 
     private LocalDateTime createdAt;
+
 }

@@ -168,7 +168,7 @@ export default function SignUp() {
           </div>
           <button
             type="submit"
-            className="w-full rounded-md bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600">
+            className="bg-black-500 hover:bg-black-600 w-full rounded-md px-4 py-2 font-semibold text-white">
             가입하기
           </button>
         </form>

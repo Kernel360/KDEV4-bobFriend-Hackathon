@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserRequest {
 
+    private Long id;
+
     @NotBlank
     private String name;
 

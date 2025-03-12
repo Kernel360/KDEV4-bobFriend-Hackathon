@@ -6,16 +6,16 @@ import com.hackathon.bobFriend.gathering.dto.GatheringRequest;
 import com.hackathon.bobFriend.gathering.dto.GatheringResponse;
 import com.hackathon.bobFriend.gathering.entity.GatheringEntity;
 import com.hackathon.bobFriend.gathering.service.GatheringService;
+import com.hackathon.bobFriend.users.dto.UserRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/bobfriend")
@@ -36,9 +36,20 @@ public class GatheringController {
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping("/gatherings")
-    public ResponseEntity<GatheringListResponse> getOneGathering() {
-        GatheringListResponse response = service.getAll();
-        return ResponseEntity.ok().body(response);
+    // 메인 페이지
+    @GetMapping("/all")
+    public ResponseEntity<List<GatheringResponse>> getOneGathering() {
+        System.out.println("요청됨");
+        return ResponseEntity.ok().body(service.getAll());
+    }
+
+    // 모임 참석하기
+    @PostMapping("/gatherings/{gathering_id}/attend")
+    public ResponseEntity attendGathering(@PathVariable Long gathering_id, @RequestBody UserRequest userRequest) {
+        if(service.attendGathering(gathering_id, userRequest.getId())) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 }
