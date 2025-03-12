@@ -1,8 +1,5 @@
-import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { ChangeEvent, FormEvent, useState } from 'react'
-import Api from './Api'
-import { User } from './interfaces/types'
 
 interface LoginFormData {
   email: string
@@ -33,13 +30,16 @@ export default function Login() {
     form.append('password', formData.password)
 
     try {
-      const response = await fetch('http://localhost:8080/bobfriend/auth', {
-        method: 'POST',
-        body: form,
-        headers: {
-          // 'Content-Type': 'multipart/form-data'는 설정하지 않아도 자동으로 설정됨.
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/bobfriend//bobfriend/auth`,
+        {
+          method: 'POST',
+          body: form,
+          headers: {
+            // 'Content-Type': 'multipart/form-data'는 설정하지 않아도 자동으로 설정됨.
+          }
         }
-      })
+      )
 
       if (response.ok) {
         const data = await response.json()

@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from 'react'
 import { User } from './interfaces/types'
-import { Gathering } from './interfaces/types'
 import Api from './Api'
 
 export default function CreateGathering({ user }: { user: User }) {
@@ -73,7 +72,7 @@ export default function CreateGathering({ user }: { user: User }) {
 
     try {
       const response = await Api.post(
-        'http://localhost:8080/bobfriend/gatherings',
+        `${process.env.REACT_APP_API_URL}/bobfriend/gatherings`,
         form,
         {
           headers: {

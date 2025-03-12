@@ -26,4 +26,6 @@ public interface GatheringRepository extends JpaRepository<GatheringEntity, Long
     @Query(value = "select * from participants where gathering_id = :gatheringId", nativeQuery = true)
     List<Object[]> getCurrentParticipant(@Param("gatheringId") Long gatheringId);
 
+    public List<GatheringEntity> findByTalkFlag(String talkFlag);
+
 }

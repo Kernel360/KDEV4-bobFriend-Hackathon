@@ -4,7 +4,7 @@ export default function Search() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
 
-  const categories = ['음식', '여행', 'IT', '운동']
+  const categories = ['외향인', '내향인', '소식좌', '푸드파이터']
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category)
@@ -19,7 +19,7 @@ export default function Search() {
     <div className="flex items-center justify-center">
       <div className="items-between flex gap-4 rounded-lg bg-white p-4 shadow-lg">
         {/* 카테고리 버튼 */}
-        <div className="flex flex-col gap-2">
+        <div className="flex gap-2">
           {categories.map(category => (
             <button
               key={category}

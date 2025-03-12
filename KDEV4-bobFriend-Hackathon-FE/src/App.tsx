@@ -1,7 +1,6 @@
 import PlaceList from './components/PlaceList'
 import SignUp from './components/SignUp'
 import Login from './components/Login'
-import Search from './components/Search'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import GatheringList from './components/GatheringList'
@@ -25,7 +24,6 @@ export default function App() {
             <>
               <Header setUser={setUser} />
               <CreateGathering user={user} />
-              <Search />
               <GatheringList user={user} />
             </>
           }
@@ -35,7 +33,6 @@ export default function App() {
           element={
             <>
               <Header setUser={setUser} />
-              <Search />
               <PlaceList user={user} />
             </>
           }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import Api from './Api' // Api 모듈은 적절히 수정되어야 합니다.
 import { Gathering } from './interfaces/types'
 import { User } from './interfaces/types'
@@ -7,10 +7,12 @@ export default function GatheringList({ user }: { user: User | null }) {
   const [gatherings, setGatherings] = useState<Gathering[]>([]) // Gathering 타입의 배열
   const [participants, setParticipants] = useState<User[]>([])
   const [loading, setLoading] = useState<boolean>(true) // 로딩 상태
-  const [currentPage, setCurrentPage] = useState<number>(1) // 현재 페이지
-  const [totalPages, setTotalPages] = useState<number>(1) // 전체 페이지 수
+  // const [currentPage, setCurrentPage] = useState<number>(1) // 현재 페이지
+  // const [totalPages, setTotalPages] = useState<number>(1) // 전체 페이지 수
 
   const [showTooltip, setShowTooltip] = useState<boolean>(false)
+  const [searchWord, setSearchWord] = useState('')
+  const [searchField, setSearchField] = useState('')
 
   const handleMouseEnter = () => {
     setShowTooltip(true)
@@ -23,11 +25,14 @@ export default function GatheringList({ user }: { user: User | null }) {
   // 모임 게시물 전체 불러오기
   const fetchGatherings = async () => {
     try {
-      const response = await Api.get('http://localhost:8080/bobfriend/all', {
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await Api.get(
+        `${process.env.REACT_APP_API_URL}/bobfriend/all`,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      })
+      )
       console.log(response.data)
       setGatherings(response.data)
       gatherings.map(gathering => {
@@ -47,7 +52,9 @@ export default function GatheringList({ user }: { user: User | null }) {
     console.log(localStorage.getItem('userId'))
     try {
       const response = await Api.post(
-        'http://localhost:8080/bobfriend/gatherings/' + id + '/attend',
+        `${process.env.REACT_APP_API_URL}/bobfriend/gatherings` +
+          id +
+          '/attend',
         { id: Number(localStorage.getItem('userId')) },
         {
           headers: {
@@ -67,6 +74,8 @@ export default function GatheringList({ user }: { user: User | null }) {
             : gathering
         )
       )
+      console.log(response)
+      console.log(user)
       console.log(gatherings)
       alert('참석 성공!')
       window.location.reload()
@@ -74,6 +83,24 @@ export default function GatheringList({ user }: { user: User | null }) {
       alert('참석 실패...')
       console.error('Gathering 데이터 불러오기 실패:', error)
     }
+  }
+
+  const handleSearch = async (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchWord(e.target.value)
+    const field = searchField
+
+    const response = await Api.get(
+      `${process.env.REACT_APP_API_URL}/bobfriend/gatherings/search?field=` +
+        field +
+        '&word=' +
+        searchWord,
+      { headers: { 'Content-Type': 'application/json' } }
+    )
+    console.log(response.data)
+  }
+
+  const handleSearchFieldChange = async (field: string) => {
+    setSearchField(field)
   }
 
   // const handleMap = (latitude: number, longitude: number) => {
@@ -101,6 +128,45 @@ export default function GatheringList({ user }: { user: User | null }) {
 
   return (
     <div className="relative mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-lg">
+      <div className="relative mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-lg">
+        <div className="mb-6 flex items-center space-x-4">
+          {/* 버튼들 */}
+          <div className="flex space-x-4">
+            <button
+              className="rounded-full bg-black px-4 py-2 text-white"
+              onClick={() => handleSearchFieldChange('I')}>
+              내향적
+            </button>
+            <button
+              className="rounded-full bg-black px-4 py-2 text-white"
+              onClick={() => handleSearchFieldChange('E')}>
+              외향적
+            </button>
+            <button
+              className="rounded-full bg-black px-4 py-2 text-white"
+              onClick={() => handleSearchFieldChange('S')}>
+              소식좌
+            </button>
+            <button
+              className="rounded-full bg-black px-4 py-2 text-white"
+              onClick={() => handleSearchFieldChange('B')}>
+              푸드파이터
+            </button>
+          </div>
+
+          {/* 검색창 */}
+          <div className="ml-4 w-full">
+            <input
+              type="text"
+              placeholder="검색..."
+              className="w-full rounded-md border border-gray-300 p-3 shadow-sm focus:ring-2 focus:ring-black focus:outline-none"
+              value={searchWord}
+              onChange={handleSearch}
+            />
+          </div>
+        </div>
+      </div>
+
       <h2 className="mb-4 text-3xl font-bold text-gray-700">
         밥친구 만나기 🥳
       </h2>
@@ -119,9 +185,7 @@ export default function GatheringList({ user }: { user: User | null }) {
                   {gathering.talk_thema}
                 </span>
               </strong>
-              <span className="text-sm text-gray-500">
-                주최자: {gathering.user_name}
-              </span>
+              <span className="text-sm text-gray-500"></span>
             </div>
             {/* <p className="text-gray-700">{gathering.content}</p> */}
             <div className="relative mt-3">
@@ -163,10 +227,11 @@ export default function GatheringList({ user }: { user: User | null }) {
               </p>
               <p className="text-gray-500">
                 참가 인원: {gathering.current_participant} /{' '}
-                {gathering.max_participant} |{' '}
+                {gathering.max_participant}{' '}
                 {gathering.participant_list.map(user => (
                   <span key={user.userId}>{user.name}, </span>
                 ))}
+                <span>{gathering.user_name}(주최자)</span>
               </p>
               <button
                 className="absolute right-4 bottom-4 rounded-full bg-black px-4 py-2 text-white shadow-lg transition transition-all duration-100 hover:scale-105"
@@ -185,7 +250,7 @@ export default function GatheringList({ user }: { user: User | null }) {
     currentPage={currentPage}
     totalPages={totalPages}
     onPageChange={setCurrentPage}
-  /> */}
+    /> */}
     </div>
   )
 }
