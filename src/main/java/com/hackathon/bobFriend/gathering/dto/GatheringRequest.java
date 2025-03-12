@@ -1,6 +1,8 @@
 package com.hackathon.bobFriend.gathering.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hackathon.bobFriend.gathering.entity.GatherTalkFlag;
 import com.hackathon.bobFriend.gathering.entity.GatheringEntity;
 import com.hackathon.bobFriend.gathering.entity.GatheringState;
@@ -20,6 +22,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class GatheringRequest {
 
     @NotNull
@@ -41,15 +44,24 @@ public class GatheringRequest {
     @NotNull
     private int maxParticipant;
 
-    @NotNull
+    @Enumerated(EnumType.STRING)
     private GatheringState state;
 
     private String talkThema;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private GatherTalkFlag talkFlag;
 
     private boolean isDeleted;
+
+    @NotNull
+    private Long userId;
+
+    private String userName;
+
+    @NotNull
+    private Long placeId;
 
     public GatheringEntity toEntity() {
         return GatheringEntity.builder()
@@ -58,9 +70,14 @@ public class GatheringRequest {
             .gatheringAt(this.gatheringAt)
             .closingAt(this.closingAt)
             .maxParticipant(this.maxParticipant)
-            .state(this.state)
+            .state(this.state == null ? GatheringState.ING : this.state)
             .talkThema(this.talkThema)
             .talkFlag(this.talkFlag)
+            .userId(this.userId)
+            .userName(this.userName)
+            .placeId(this.placeId)
             .build();
     }
+
+
 }

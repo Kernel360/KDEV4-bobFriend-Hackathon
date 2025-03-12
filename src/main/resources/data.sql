@@ -6,6 +6,9 @@ insert into users (name, email, password)
 	values ('오승택', 'taek333@naver.com', '$2a$10$dvugJh/WePMbAYPs3rbXaOUGNT0i7Xu71Ais12QOu9lV4TWwiZ51i');
 insert into users (name, email, password) 
 	values ('허성은', 'sung555@naver.com', 'sung555!');
+insert into users (name, email, password)
+values ('승택', 'asd@asd', '$2a$10$iQpHuUeG54bqEbHYKGY6pOKd0/n2vqdqsAZEzs6JFvUF9R88ksD5O');
+
 
 INSERT INTO places (
     name,
@@ -35,7 +38,8 @@ INSERT INTO gatherings (
         talk_thema,
         talk_flag,
         user_id,
-        place_id
+        place_id,
+        user_name
     )
 VALUES
     (
@@ -48,7 +52,8 @@ VALUES
         '',
         'I',
         2,  -- 사용자 2번
-        1   -- 장소 1번
+        1,   -- 장소 1번
+        '송어진'
     ),
     (
         '배고프다, 진짜 맛있는 거 먹자',
@@ -60,5 +65,14 @@ VALUES
         '입맛 살리는 맛집 투어',
         'E',
         2,  -- 사용자 2번
-        2   -- 장소 2번
+        2,   -- 장소 2번
+        '송어진'
     );
+
+
+INSERT INTO participants (gathering_id, user_id)
+VALUES ('1', '1');
+INSERT INTO participants (gathering_id, user_id)
+VALUES ('1', '2');
+INSERT INTO participants (gathering_id, user_id)
+VALUES ('1', '3');

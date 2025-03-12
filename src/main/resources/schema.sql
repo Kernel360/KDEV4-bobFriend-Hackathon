@@ -1,9 +1,9 @@
---create database bobFriend;
 use bobFriend;
 
 DROP TABLE IF EXISTS gatherings;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS places;
+DROP TABLE IF EXISTS participants;
 
 create table users (
 	id bigint auto_increment primary key,
@@ -18,7 +18,7 @@ create table places (
 	id bigint auto_increment primary key,
 	name varchar(50) unique,
     content text,
-    address varchar(100) not null,
+    address varchar(100) not null unique,
     category enum('KOR', 'JPN', 'CHN', 'WES', 'ETC') not null
 );
 
@@ -32,12 +32,18 @@ create table gatherings (
     max_participant int not null,
     state enum('ING', 'END') not null,
     talk_thema varchar(100),
-    talk_flag enum('I', 'E', 'N') not null,
-	  is_deleted boolean default false,
-    user_id bigint, /*fk from users table*/
-    place_id bigint, /*fk from places table*/
+    talk_flag enum('I', 'E', 'N', 'S', 'B') not null,
+    is_deleted boolean default false,
+    user_id bigint NOT NULL, /*fk from users table*/
+    place_id bigint NOT NULL, /*fk from places table*/
+    user_name varchar(50),
     foreign key (user_id) references users (id),
     foreign key (place_id) references places (id)
+);
+
+create table participants (
+    gathering_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL
 );
 
 select * from users;

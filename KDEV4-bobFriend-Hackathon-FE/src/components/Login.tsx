@@ -10,7 +10,6 @@ interface LoginFormData {
 }
 
 export default function Login() {
-  const [user, setUser] = useState<User>()
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: ''
@@ -45,12 +44,19 @@ export default function Login() {
       if (response.ok) {
         const data = await response.json()
         localStorage.setItem('token', data.token)
-        localStorage.setItem('username', data.user.name)
-        navigate('/bobfriend/places')
+        console.log('user : ' + data.user)
+        localStorage.setItem('userId', data.user.userId)
+        localStorage.setItem('userName', data.user.name)
+        localStorage.setItem('userEmail', data.user.email)
+        navigate('/bobfriend')
       } else {
         throw new Error('로그인 실패! 다시 시도해 주세요.')
       }
     } catch (error) {}
+  }
+
+  const handleSignup = () => {
+    navigate('/bobfriend/signup')
   }
 
   return (
@@ -84,9 +90,10 @@ export default function Login() {
           </div>
           <button
             type="submit"
-            className="w-full rounded-md bg-blue-500 py-3 font-semibold text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            className="w-full rounded-md bg-black py-3 font-semibold text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
             로그인하기
           </button>
+          <button onClick={handleSignup}>가입하기</button>
         </form>
       </div>
     </div>

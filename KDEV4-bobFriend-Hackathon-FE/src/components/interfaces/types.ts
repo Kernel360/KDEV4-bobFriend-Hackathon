@@ -17,8 +17,29 @@ export interface Place {
 }
 
 export interface User {
+  userId: number
   name: string
   email: string
+  isActive?: boolean
+  createdAt?: string
+  updatedAt?: string
+}
+
+export interface Gathering {
+  id: number
+  title: string
+  content: string
+  gathering_at: string
+  closing_at: string
+  created_at: string
+  max_participant: number
+  state: string
+  talk_thema: string
+  talk_flag: string
+  user_name: number
+  current_participant: number
+  participant_list: User[]
+  place: Place
 }
 
 export interface Pagination {
