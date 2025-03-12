@@ -34,7 +34,7 @@ export default function Header({ setUser }: { setUser: (info: any) => void }) {
   const fetchUser = async () => {
     try {
       const response = await Api.get(
-        `${process.env.REACT_APP_API_URL}/bobfriend/users/validate`,
+        `http://175.106.98.84:8080/bobfriend/users/validate`,
         {
           headers: {
             'Content-Type': 'application/json'

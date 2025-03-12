@@ -31,7 +31,7 @@ export default function Login() {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/bobfriend//bobfriend/auth`,
+        `http://175.106.98.84:8080/bobfriend//bobfriend/auth`,
         {
           method: 'POST',
           body: form,

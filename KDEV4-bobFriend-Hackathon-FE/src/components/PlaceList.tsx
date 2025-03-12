@@ -22,7 +22,7 @@ export default function PlaceList({ user }: { user: User | null }) {
   const fetchGet = async () => {
     try {
       const response = await Api.get(
-        `${process.env.REACT_APP_API_URL}/bobfriend/places`,
+        `http://175.106.98.84:8080/bobfriend/places`,
         {
           headers: {
             'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ export default function PlaceList({ user }: { user: User | null }) {
     console.log(newPlace)
     try {
       const response = await Api.post(
-        `${process.env.REACT_APP_API_URL}/bobfriend/places`,
+        `http://175.106.98.84:8080/bobfriend/places`,
         {
           name: newPlace.name,
           content: newPlace.content || '', // content는 선택 사항

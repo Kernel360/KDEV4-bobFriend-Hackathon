@@ -26,7 +26,7 @@ export default function GatheringList({ user }: { user: User | null }) {
   const fetchGatherings = async () => {
     try {
       const response = await Api.get(
-        `${process.env.REACT_APP_API_URL}/bobfriend/all`,
+        `http://175.106.98.84:8080/bobfriend/all`,
         {
           headers: {
             'Content-Type': 'application/json'
@@ -52,9 +52,7 @@ export default function GatheringList({ user }: { user: User | null }) {
     console.log(localStorage.getItem('userId'))
     try {
       const response = await Api.post(
-        `${process.env.REACT_APP_API_URL}/bobfriend/gatherings` +
-          id +
-          '/attend',
+        `http://175.106.98.84:8080/bobfriend/gatherings` + id + '/attend',
         { id: Number(localStorage.getItem('userId')) },
         {
           headers: {
@@ -90,7 +88,7 @@ export default function GatheringList({ user }: { user: User | null }) {
     const field = searchField
 
     const response = await Api.get(
-      `${process.env.REACT_APP_API_URL}/bobfriend/gatherings/search?field=` +
+      `http://175.106.98.84:8080/bobfriend/gatherings/search?field=` +
         field +
         '&word=' +
         searchWord,
@@ -133,22 +131,22 @@ export default function GatheringList({ user }: { user: User | null }) {
           {/* 버튼들 */}
           <div className="flex space-x-4">
             <button
-              className="rounded-full bg-black px-4 py-2 text-white"
+              className={`${searchField === 'I' ? 'bg-black text-white' : 'bg-gray-200'} rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
               onClick={() => handleSearchFieldChange('I')}>
               내향적
             </button>
             <button
-              className="rounded-full bg-black px-4 py-2 text-white"
+              className={`${searchField === 'E' ? 'bg-black text-white' : 'bg-gray-200'} rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
               onClick={() => handleSearchFieldChange('E')}>
               외향적
             </button>
             <button
-              className="rounded-full bg-black px-4 py-2 text-white"
+              className={`${searchField === 'S' ? 'bg-black text-white' : 'bg-gray-200'} rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
               onClick={() => handleSearchFieldChange('S')}>
               소식좌
             </button>
             <button
-              className="rounded-full bg-black px-4 py-2 text-white"
+              className={`${searchField === 'B' ? 'bg-black text-white' : 'bg-gray-200'} rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
               onClick={() => handleSearchFieldChange('B')}>
               푸드파이터
             </button>

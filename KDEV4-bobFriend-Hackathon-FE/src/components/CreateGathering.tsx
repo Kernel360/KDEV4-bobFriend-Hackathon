@@ -72,7 +72,7 @@ export default function CreateGathering({ user }: { user: User }) {
 
     try {
       const response = await Api.post(
-        `${process.env.REACT_APP_API_URL}/bobfriend/gatherings`,
+        `https://175.106.98.84:8080/bobfriend/gatherings`,
         form,
         {
           headers: {
