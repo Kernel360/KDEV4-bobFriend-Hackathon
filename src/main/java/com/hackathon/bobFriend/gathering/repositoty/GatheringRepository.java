@@ -1,5 +1,6 @@
 package com.hackathon.bobFriend.gathering.repositoty;
 
+import com.hackathon.bobFriend.gathering.entity.GatherTalkFlag;
 import com.hackathon.bobFriend.gathering.entity.GatheringEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,6 +27,8 @@ public interface GatheringRepository extends JpaRepository<GatheringEntity, Long
     @Query(value = "select * from participants where gathering_id = :gatheringId", nativeQuery = true)
     List<Object[]> getCurrentParticipant(@Param("gatheringId") Long gatheringId);
 
-    public List<GatheringEntity> findByTalkFlag(String talkFlag);
+    public List<GatheringEntity> findByTitle(String title);
+
+    public List<GatheringEntity> findByTalkFlag(GatherTalkFlag talkFlag);
 
 }

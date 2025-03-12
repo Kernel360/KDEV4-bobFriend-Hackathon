@@ -13,7 +13,7 @@ export default function CreateGathering({ user }: { user: User }) {
     talk_flag: string
     user_id: number
     user_name: string
-    place_id: string
+    place_name: string
   }
 
   const [isOpen, setIsOpen] = useState(false) // 모임 생성 창 열고 닫기
@@ -35,7 +35,7 @@ export default function CreateGathering({ user }: { user: User }) {
     talk_flag: 'I',
     user_id: user.userId,
     user_name: user.name,
-    place_id: ''
+    place_name: ''
   })
 
   const handleInputChange = (
@@ -67,12 +67,12 @@ export default function CreateGathering({ user }: { user: User }) {
       talk_flag: formData.talk_flag || null,
       user_id: user.userId,
       user_name: user.name,
-      place_id: formData.place_id
+      place_name: formData.place_name
     }
 
     try {
       const response = await Api.post(
-        `https://175.106.98.84:8080/bobfriend/gatherings`,
+        `http://localhost:8080/bobfriend/gatherings`,
         form,
         {
           headers: {
@@ -143,8 +143,8 @@ export default function CreateGathering({ user }: { user: User }) {
               장소
             </label>
             <input
-              id="place_id"
-              value={formData.place_id}
+              id="place_name"
+              value={formData.place_name}
               onChange={handleInputChange}
               className="w-full rounded-md border border-gray-300 p-2"
               required

@@ -30,16 +30,13 @@ export default function Login() {
     form.append('password', formData.password)
 
     try {
-      const response = await fetch(
-        `http://175.106.98.84:8080/bobfriend//bobfriend/auth`,
-        {
-          method: 'POST',
-          body: form,
-          headers: {
-            // 'Content-Type': 'multipart/form-data'는 설정하지 않아도 자동으로 설정됨.
-          }
+      const response = await fetch(`http://localhost:8080/bobfriend/auth`, {
+        method: 'POST',
+        body: form,
+        headers: {
+          // 'Content-Type': 'multipart/form-data'는 설정하지 않아도 자동으로 설정됨.
         }
-      )
+      })
 
       if (response.ok) {
         const data = await response.json()

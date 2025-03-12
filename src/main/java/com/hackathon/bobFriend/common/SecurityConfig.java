@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource)) // 새로운 방식으로 CORS 설정 적용
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/**").permitAll()
-                        .anyRequest().authenticated()) // 모든 요청을 허용 (개발 단계)
+                        .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

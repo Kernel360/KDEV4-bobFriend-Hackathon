@@ -21,14 +21,11 @@ export default function PlaceList({ user }: { user: User | null }) {
 
   const fetchGet = async () => {
     try {
-      const response = await Api.get(
-        `http://175.106.98.84:8080/bobfriend/places`,
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
+      const response = await Api.get(`http://localhost:8080/bobfriend/places`, {
+        headers: {
+          'Content-Type': 'application/json'
         }
-      )
+      })
       setPlaces(response.data)
       setLoading(false)
       console.log(user)
@@ -42,7 +39,7 @@ export default function PlaceList({ user }: { user: User | null }) {
     console.log(newPlace)
     try {
       const response = await Api.post(
-        `http://175.106.98.84:8080/bobfriend/places`,
+        `http://localhost:8080/bobfriend/places`,
         {
           name: newPlace.name,
           content: newPlace.content || '', // content는 선택 사항

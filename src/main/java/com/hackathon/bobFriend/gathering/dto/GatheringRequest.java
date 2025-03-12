@@ -61,7 +61,7 @@ public class GatheringRequest {
     private String userName;
 
     @NotNull
-    private Long placeId;
+    private String placeName;
 
     public GatheringEntity toEntity() {
         return GatheringEntity.builder()
@@ -75,7 +75,6 @@ public class GatheringRequest {
             .talkFlag(this.talkFlag)
             .userId(this.userId)
             .userName(this.userName)
-            .placeId(this.placeId)
             .build();
     }
 

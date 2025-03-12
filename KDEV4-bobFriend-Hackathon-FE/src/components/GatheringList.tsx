@@ -25,14 +25,11 @@ export default function GatheringList({ user }: { user: User | null }) {
   // 모임 게시물 전체 불러오기
   const fetchGatherings = async () => {
     try {
-      const response = await Api.get(
-        `http://175.106.98.84:8080/bobfriend/all`,
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
+      const response = await Api.get(`http://localhost:8080/bobfriend/all`, {
+        headers: {
+          'Content-Type': 'application/json'
         }
-      )
+      })
       console.log(response.data)
       setGatherings(response.data)
       gatherings.map(gathering => {
@@ -52,7 +49,7 @@ export default function GatheringList({ user }: { user: User | null }) {
     console.log(localStorage.getItem('userId'))
     try {
       const response = await Api.post(
-        `http://175.106.98.84:8080/bobfriend/gatherings` + id + '/attend',
+        `http://localhost:8080/bobfriend/gatherings` + id + '/attend',
         { id: Number(localStorage.getItem('userId')) },
         {
           headers: {
@@ -88,7 +85,7 @@ export default function GatheringList({ user }: { user: User | null }) {
     const field = searchField
 
     const response = await Api.get(
-      `http://175.106.98.84:8080/bobfriend/gatherings/search?field=` +
+      `http://localhost:8080/bobfriend/gatherings/search?field=` +
         field +
         '&word=' +
         searchWord,
@@ -126,33 +123,32 @@ export default function GatheringList({ user }: { user: User | null }) {
 
   return (
     <div className="relative mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-lg">
-      <div className="relative mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-lg">
+      {/*<div className="relative mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-lg">
         <div className="mb-6 flex items-center space-x-4">
-          {/* 버튼들 */}
-          <div className="flex space-x-4">
+
+          <div className="flex flex-wrap space-x-4">
             <button
-              className={`${searchField === 'I' ? 'bg-black text-white' : 'bg-gray-200'} rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
+              className={`${searchField === 'I' ? 'bg-black text-white' : 'bg-gray-200 text-black'} m-2 h-10 rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
               onClick={() => handleSearchFieldChange('I')}>
               내향적
             </button>
             <button
-              className={`${searchField === 'E' ? 'bg-black text-white' : 'bg-gray-200'} rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
+              className={`${searchField === 'E' ? 'bg-black text-white' : 'bg-gray-200 text-black'} m-2 h-10 rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
               onClick={() => handleSearchFieldChange('E')}>
               외향적
             </button>
             <button
-              className={`${searchField === 'S' ? 'bg-black text-white' : 'bg-gray-200'} rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
+              className={`${searchField === 'S' ? 'bg-black text-white' : 'bg-gray-200 text-black'} m-2 h-10 rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
               onClick={() => handleSearchFieldChange('S')}>
               소식좌
             </button>
             <button
-              className={`${searchField === 'B' ? 'bg-black text-white' : 'bg-gray-200'} rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
+              className={`${searchField === 'B' ? 'bg-black text-white' : 'bg-gray-200 text-black'} m-2 h-10 rounded-full bg-black px-4 py-2 text-white hover:scale-105`}
               onClick={() => handleSearchFieldChange('B')}>
               푸드파이터
             </button>
           </div>
 
-          {/* 검색창 */}
           <div className="ml-4 w-full">
             <input
               type="text"
@@ -163,7 +159,7 @@ export default function GatheringList({ user }: { user: User | null }) {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <h2 className="mb-4 text-3xl font-bold text-gray-700">
         밥친구 만나기 🥳

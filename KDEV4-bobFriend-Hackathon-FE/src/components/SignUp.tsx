@@ -67,7 +67,7 @@ export default function SignUp() {
 
     try {
       const response = await axios.post(
-        `http://175.106.98.84:8080/bobfriend/signup`,
+        `http://localhost:8080/bobfriend/signup`,
         form,
         {
           headers: {

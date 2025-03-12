@@ -37,6 +37,7 @@ public class GatheringService {
     @Transactional
     public void create(GatheringRequest request) {
         GatheringEntity entity = request.toEntity();
+        entity.setPlaceId(placeRepository.findByName(request.getPlaceName()).getId());
         repository.save(entity);
         GatheringResponse.of(entity);
     }
@@ -133,14 +134,26 @@ public class GatheringService {
     public List<GatheringResponse> searchGathering(String field, String word) {
         // 전체 검색
         if(field.isEmpty()) {
-            return getAll();
-            // 필드 검색
+            return gatheringRepository.findByTitle(word).stream()
+                    .map(GatheringResponse::of).toList();
+        // 플래그 검색
         } else {
             GatherTalkFlag[] talkFlags = GatherTalkFlag.values();
             for(GatherTalkFlag talkFlag : talkFlags) {
+                // 플래그 필터링
                 if(talkFlag.name().equals(field)) {
-                    List<GatheringEntity> list = gatheringRepository.findByTalkFlag(talkFlag.name());
-                    return list.stream().map(GatheringResponse::of).toList();
+                    // 제목 검색
+                    List<GatheringEntity> list = gatheringRepository.findByTalkFlag(talkFlag);
+                    return list.stream()
+                            .map(entity -> {
+                                if (entity.getTitle().equals(word)) {
+                                    return GatheringResponse.of(entity);
+                                } else {
+                                    return null;
+                                }
+                            })
+                            .filter(Objects::nonNull) // null 값 필터링
+                            .toList();
                 }
             }
         }
