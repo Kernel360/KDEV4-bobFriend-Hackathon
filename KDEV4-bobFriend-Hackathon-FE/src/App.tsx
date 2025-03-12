@@ -1,16 +1,13 @@
 import PlaceList from './components/PlaceList'
 import SignUp from './components/SignUp'
 import Login from './components/Login'
+import Search from './components/Search'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import GatheringList from './components/GatheringList'
 import { useState } from 'react'
 import { User } from './components/interfaces/types'
 import CreateGathering from './components/CreateGathering'
-
-;<script
-  type="text/javascript"
-  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b2010b1948e51d5941c3b5a671298b4e"></script>
 
 export default function App() {
   const [user, setUser] = useState<User>({
@@ -28,6 +25,7 @@ export default function App() {
             <>
               <Header setUser={setUser} />
               <CreateGathering user={user} />
+              <Search />
               <GatheringList user={user} />
             </>
           }
@@ -37,6 +35,7 @@ export default function App() {
           element={
             <>
               <Header setUser={setUser} />
+              <Search />
               <PlaceList user={user} />
             </>
           }

@@ -17,14 +17,14 @@ export default function CreateGathering({ user }: { user: User }) {
     place_id: string
   }
 
-  const [isOpen, setIsOpen] = useState(true) // 모임 생성 창 열고 닫기
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [gatheringAt, setGatheringAt] = useState('')
-  const [closingAt, setClosingAt] = useState('')
-  const [maxParticipant, setMaxParticipant] = useState(1)
-  const [talkThema, setTalkThema] = useState('')
-  const [talkFlag, setTalkFlag] = useState<string | null>('I')
+  const [isOpen, setIsOpen] = useState(false) // 모임 생성 창 열고 닫기
+  //   const [title, setTitle] = useState('')
+  //   const [content, setContent] = useState('')
+  //   const [gatheringAt, setGatheringAt] = useState('')
+  //   const [closingAt, setClosingAt] = useState('')
+  //   const [maxParticipant, setMaxParticipant] = useState(1)
+  //   const [talkThema, setTalkThema] = useState('')
+  //   const [talkFlag, setTalkFlag] = useState<string | null>('I')
 
   const [formData, setFormData] = useState<GatheringFormData>({
     title: '',

@@ -1,14 +1,11 @@
-insert into users (name, email, password) 
-	values ('박현', 'hyun111@naver.com', 'hyun111!');
-insert into users (name, email, password) 
-	values ('송어진', 'eojin222@naver.com', 'eojin222!');
-insert into users (name, email, password) 
-	values ('오승택', 'taek333@naver.com', '$2a$10$dvugJh/WePMbAYPs3rbXaOUGNT0i7Xu71Ais12QOu9lV4TWwiZ51i');
-insert into users (name, email, password) 
-	values ('허성은', 'sung555@naver.com', 'sung555!');
-insert into users (name, email, password)
-values ('승택', 'asd@asd', '$2a$10$iQpHuUeG54bqEbHYKGY6pOKd0/n2vqdqsAZEzs6JFvUF9R88ksD5O');
 
+insert into users (name, email, password)
+values ('오승택', 'asd@asd', '$2a$10$iQpHuUeG54bqEbHYKGY6pOKd0/n2vqdqsAZEzs6JFvUF9R88ksD5O'),
+('강민수', 'minsu@gmail.com', '$2a$10$i6gp733TWwKsE5V97J8CHO/Kc20SHq0O/7jEVbnwMmUxlLBmBXU..'),
+('동언', 'kde123@gmail.com', '$2a$10$Kk1pV8zNhVpY9qMCcV8Hd.qTxCZQZW9JeLEpbArzvbVIGTyr88JVy'),
+('허성은', 'sung555@naver.com', '$2a$10$Jv.8v2lt4h7IRAMgcfXijup0/epUNSv.XP.tcQq8XI1wSyI7EH6zy'),
+('송어진', 'song@gmail.com', '$2a$10$Jv.8v2lt4h7IRAMgcfXijup0/epUNSv.XP.tcQq8XI1wSyI7EH6zy'),
+('박현', 'hyun@gmail.com', '$2a$10$Jv.8v2lt4h7IRAMgcfXijup0/epUNSv.XP.tcQq8XI1wSyI7EH6zy');
 
 INSERT INTO places (
     name,
