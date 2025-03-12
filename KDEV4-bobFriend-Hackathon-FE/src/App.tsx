@@ -8,10 +8,6 @@ import { useState } from 'react'
 import { User } from './components/interfaces/types'
 import CreateGathering from './components/CreateGathering'
 
-;<script
-  type="text/javascript"
-  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b2010b1948e51d5941c3b5a671298b4e"></script>
-
 export default function App() {
   const [user, setUser] = useState<User>({
     userId: 0,

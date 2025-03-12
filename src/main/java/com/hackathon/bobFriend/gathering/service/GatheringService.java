@@ -5,6 +5,7 @@ import com.hackathon.bobFriend.common.exception.CustomException;
 import com.hackathon.bobFriend.gathering.dto.GatheringListResponse;
 import com.hackathon.bobFriend.gathering.dto.GatheringRequest;
 import com.hackathon.bobFriend.gathering.dto.GatheringResponse;
+import com.hackathon.bobFriend.gathering.entity.GatherTalkFlag;
 import com.hackathon.bobFriend.gathering.entity.GatheringEntity;
 import com.hackathon.bobFriend.gathering.repositoty.GatheringRepository;
 
@@ -126,5 +127,23 @@ public class GatheringService {
         }).toList();
 
         return userList;
+    }
+
+    // 모임 검색
+    public List<GatheringResponse> searchGathering(String field, String word) {
+        // 전체 검색
+        if(field.isEmpty()) {
+            return getAll();
+            // 필드 검색
+        } else {
+            GatherTalkFlag[] talkFlags = GatherTalkFlag.values();
+            for(GatherTalkFlag talkFlag : talkFlags) {
+                if(talkFlag.name().equals(field)) {
+                    List<GatheringEntity> list = gatheringRepository.findByTalkFlag(talkFlag.name());
+                    return list.stream().map(GatheringResponse::of).toList();
+                }
+            }
+        }
+        return getAll();
     }
 }

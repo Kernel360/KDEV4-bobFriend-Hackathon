@@ -52,4 +52,10 @@ public class GatheringController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
+     @GetMapping("/gatherings/search")
+    public ResponseEntity<List<GatheringResponse>> searchGathering(@RequestParam String field, @RequestParam String word) {
+        var list = service.searchGathering(field, word);
+        return ResponseEntity.ok().body(list);
+     }
 }

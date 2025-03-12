@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { ApiResponse, Place, User } from './interfaces/types'
+import { Place, User } from './interfaces/types'
 import Api from './Api'
-import Pagination from './Pagination'
 
 type PlaceCategory = 'KOR' | 'JPN' | 'CHN' | 'WES' // 예시로 몇 가지 카테고리 지정
 
 export default function PlaceList({ user }: { user: User | null }) {
   const [places, setPlaces] = useState<Place[]>([])
   const [loading, setLoading] = useState<boolean>(true)
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const [totalPages, setTotalPages] = useState<number>(1)
+  // const [currentPage, setCurrentPage] = useState<number>(1)
+  // const [totalPages, setTotalPages] = useState<number>(1)
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
 
   // 새 장소를 추가하기 위한 상태
@@ -22,13 +21,17 @@ export default function PlaceList({ user }: { user: User | null }) {
 
   const fetchGet = async () => {
     try {
-      const response = await Api.get('http://localhost:8080/bobfriend/places', {
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await Api.get(
+        `http://175.106.98.84:8080/bobfriend/places`,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      })
+      )
       setPlaces(response.data)
       setLoading(false)
+      console.log(user)
     } catch (error) {
       console.error('Failed to fetch places', error)
       setLoading(false)
@@ -39,7 +42,7 @@ export default function PlaceList({ user }: { user: User | null }) {
     console.log(newPlace)
     try {
       const response = await Api.post(
-        'http://localhost:8080/bobfriend/places',
+        `http://175.106.98.84:8080/bobfriend/places`,
         {
           name: newPlace.name,
           content: newPlace.content || '', // content는 선택 사항
@@ -61,7 +64,7 @@ export default function PlaceList({ user }: { user: User | null }) {
 
   useEffect(() => {
     fetchGet()
-  }, [currentPage])
+  }, [])
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

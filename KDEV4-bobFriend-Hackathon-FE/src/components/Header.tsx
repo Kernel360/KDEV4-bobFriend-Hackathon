@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import Api from './Api'
-import { User } from './interfaces/types'
 
 export default function Header({ setUser }: { setUser: (info: any) => void }) {
   // const [user, setUser] = useState<User>({
@@ -19,11 +18,13 @@ export default function Header({ setUser }: { setUser: (info: any) => void }) {
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     localStorage.removeItem('token')
     setIsLoggedIn(false)
+    console.log(e.target)
     window.location.reload()
   }
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     window.location.href = '/bobfriend/auth'
+    console.log(e.target)
   }
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function Header({ setUser }: { setUser: (info: any) => void }) {
   const fetchUser = async () => {
     try {
       const response = await Api.get(
-        'http://localhost:8080/bobfriend/users/validate',
+        `http://175.106.98.84:8080/bobfriend/users/validate`,
         {
           headers: {
             'Content-Type': 'application/json'

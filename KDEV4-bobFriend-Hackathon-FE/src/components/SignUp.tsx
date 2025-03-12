@@ -1,7 +1,7 @@
-import React, { ChangeEvent, FormEvent } from 'react'
+import { ChangeEvent, FormEvent } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Api from './Api'
+
 import axios from 'axios'
 
 interface SignUpFormData {
@@ -17,7 +17,7 @@ export default function SignUp() {
     password: ''
     // profile: null
   })
-  const [profileImage, setProfileImage] = useState<string | null>(null)
+  // const [profileImage, setProfileImage] = useState<string | null>(null)
 
   const navigate = useNavigate()
 
@@ -67,7 +67,7 @@ export default function SignUp() {
 
     try {
       const response = await axios.post(
-        'http://localhost:8080/bobfriend/signup',
+        `http://175.106.98.84:8080/bobfriend/signup`,
         form,
         {
           headers: {
@@ -137,38 +137,10 @@ export default function SignUp() {
               onChange={handleInputChange}
             />
           </div>
-          <div className="mb-6">
-            <label
-              htmlFor="profile"
-              className="block text-sm font-medium text-gray-700">
-              프로필 사진
-            </label>
-            {/* 미리보기 이미지 */}
-            {profileImage && (
-              <div className="mt-3">
-                <img
-                  src={profileImage}
-                  alt="Preview"
-                  className="h-32 w-32 rounded-full object-cover"
-                />
-              </div>
-            )}
-            {/* 숨겨진 파일 입력 */}
-            <input
-              type="file"
-              id="profileInput"
-              className="hidden"
-            />
-            {/* 업로드 버튼 */}
-            <button
-              type="button"
-              className="mt-2 rounded-md bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600">
-              프로필 사진 업로드
-            </button>
-          </div>
+
           <button
             type="submit"
-            className="bg-black-500 hover:bg-black-600 w-full rounded-md px-4 py-2 font-semibold text-white">
+            className="w-full rounded-md bg-black px-4 py-2 font-semibold text-white">
             가입하기
           </button>
         </form>
