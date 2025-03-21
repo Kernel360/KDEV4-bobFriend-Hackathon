@@ -16,11 +16,11 @@
     
 <h2>02. 프로젝트 기획 및 설계 </h2>
 
-    - 요구사항 정의서 : REQUIREDMENTS.md
-    - 와이어프레임 : https://www.figma.com/design/ZQ9dwynaUj721lYu0AlHAc/BobFriend?node-id=0-1&p=f
-    - 서비스 아키텍처 : ![Image](https://github.com/user-attachments/assets/687f4f27-346a-4ce3-89c9-3c3834ab5a81)
-    - ERD : ![Image](https://github.com/user-attachments/assets/2bc74c1d-e17f-4241-8654-f1a9a619e471)<br>
-    - API 명세서 : https://www.notion.so/1b2a3f519ab880379fbdf17e63a8c046?v=1b2a3f519ab881bda1e4000cf6a14ef6&pvs=4
+- 요구사항 정의서 : REQUIREDMENTS.md
+- 와이어프레임 : https://www.figma.com/design/ZQ9dwynaUj721lYu0AlHAc/BobFriend?node-id=0-1&p=f
+- 서비스 아키텍처 : ![Image](https://github.com/user-attachments/assets/687f4f27-346a-4ce3-89c9-3c3834ab5a81)
+- ERD : ![Image](https://github.com/user-attachments/assets/2bc74c1d-e17f-4241-8654-f1a9a619e471)<br>
+- API 명세서 : https://www.notion.so/1b2a3f519ab880379fbdf17e63a8c046?v=1b2a3f519ab881bda1e4000cf6a14ef6&pvs=4
 
 <h2>03. 핵심 기능 </h2>
 
